@@ -1,0 +1,43 @@
+-- V1.0a AR
+-- 12.03.2017 15:31:32 AR V1.0b
+-- 02.04.2017 10:52:29 AR V1.0c
+-- 12.08.2017 06:56:43 AR V1.0d
+
+block.setSize(151, 51)
+
+generic = {
+  parameter = {
+    text = ''
+  },
+
+  init = function(self)
+    block.setInputsPinCount(0)
+    block.setOutputsPinCount(0)
+    block.modifyFlags('CanGenerateCode', false)
+  end,
+
+  open = function(self)
+    gui.add('Info', 'Info', 'Documetation files', 'Use this block to write documentation')
+    gui.add('Memo', 'Memo', {Align = 'alClient'})
+    gui.set('Memo', self.parameter.text)
+    gui.setSize(460, 220)
+  end,
+
+  apply = function(self)
+    self.parameter.text = gui.get('Memo', 'Text')
+  end,
+
+  close = function()
+  end,
+
+  avatar = function(self)
+    local s = string.gsub(self.parameter.text, '[\n]', '\\n')
+    s = string.gsub(s, '%c', '')
+    s = string.gsub(s, "'", "\\'")
+    return block.getDefaultAvatar(0x50, "'" .. s .. "'", ' ')
+  end,
+
+  generate = function(self)
+  end,
+
+}
