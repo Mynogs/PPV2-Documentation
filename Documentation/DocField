@@ -25,6 +25,7 @@ generic = {
 
   apply = function(self)
     self.parameter.text = gui.get('Memo', 'Text')
+    print(self.parameter.text)
   end,
 
   close = function()
